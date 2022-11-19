@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react'
-import requests from '../Requests'
+import React, { useState, useEffect } from 'react';
+import requests from '../Requests';
 const Main = () => {
 
     const [movies, setMovies] = useState([]);
@@ -8,7 +8,7 @@ const Main = () => {
     const movie = movies[Math.floor(Math.random() * movies.length)]
 
     useEffect(() => {
-        axios.get(requests.requestPopular).then((response) => {
+        axios.get(requests.requestTrending).then((response) => {
             setMovies(response.data.results);
         })
     }
@@ -17,14 +17,35 @@ const Main = () => {
     // console.log(movies);
     // console.log(movie);
 
+    const cuttingString = (str,num) => {
+        if (str?.length > num) {
+            return str.slice(0, num) + "....";
+        }
+        else {
+            return str;
+        }
+    }
+
     return (
         <div className='w-full h-[550px] text-white'>
-            <div className='w-full h-full'>
-                <img  src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
-                      alt={movie?.title} />
+            <div className='w-full h-full '>
+                <div className='absolute w-full h-[550px] bg-gradient-to-r from-black'></div>
+                <img className='object-cover h-full w-full'
+                     src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
+                     alt={movie?.title}
+                />
+                <div className='absolute w-full top-[20%] p-4 ,d:p-8' >
+                    <h1>{ movie?.title}</h1>
+                    <div className='my-4'>
+                        <button className='border bg-gray-300 text-black border-gray-300 py-2 px-5'>Play</button>
+                        <button className='border  text-white border-gray-300 py-2 px-5 ml-4'>Watch Later</button>
+                    </div>
+                    <p className='text-gray-400 text-sm'>Released : {movie?.release_date}</p>
+                    <p className='w-full md:max-w-[50%] xl:max-w-[35%] text-gray-200'>{ cuttingString(movie?.overview,150)}</p>
+                </div>
             </div> 
         </div>
     )
 }
-
+ 
 export default Main;
