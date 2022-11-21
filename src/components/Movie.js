@@ -13,7 +13,7 @@ const Movie = ({ item }) => {
                     src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`} />
             <div className="absolute top-0 left-0 right-0 w-ful h-full text-white hover:bg-black/80 opacity-0 hover:opacity-100">
                 <p className="white-space-normal h-full text-xs md:text-sm font-bold flex justify-center items-center text-center">
-                    {item?.title}
+                    {item?.title }
                 </p>
                 <p>
                     {like ? <FaHeart className="absolute top-4 left-4 text-gray-300" /> : <FaRegHeart className="absolute top-4 left-4 text-gray-300" />}
