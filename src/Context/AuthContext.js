@@ -39,6 +39,6 @@ export function ContextProvider({children}){
     )
 };
 
-export const UseManagement = () => {
+export const UserManagement = () => {
     return useContext(Context);
 }
